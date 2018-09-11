@@ -10,6 +10,7 @@ $(function () {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
     $.get("/posts/" + nextId + ".json", function(data) {
       $(".postName").text(data["name"]);
+      $(".postTitle").text(data["title"]);
       $(".postPrice").text(data["price"]);
       $(".postDescription").text(data["description"]);
       $(".postInventory").text(data["inventory"]);
