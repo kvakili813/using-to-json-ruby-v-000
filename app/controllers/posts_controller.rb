@@ -18,8 +18,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    Product.create(product_params)
-    redirect_to products_path
+    Post.create(post_params)
+    redirect_to posts_path
   end
 
   def show
