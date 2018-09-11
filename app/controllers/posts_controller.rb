@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
-
   def index
     @posts = Post.all
   end
 
-  def show
+  def inventory
+    post = Post.find(params[:id])
+    render plain: post.inventory > 0 ? true : false
+  end
+
+  def description
+    post = Post.find(params[:id])
+    render plain: post.description
   end
 
   def new
@@ -13,32 +18,26 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
-    @post.save
-    redirect_to post_path(@post)
+    Post.create(post_params)
+    redirect_to posts_path
   end
 
-  def edit
-  end
-
-  def update
-    @post.update(post_params)
-    redirect_to post_path(@post)
-  end
-
-  def post_data
-    post = Post.find(params[:id])
-    render json: PostSerializer.serialize(post)
-  end
-
-private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_post
+  def show
     @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @post.to_json(only: [:name, :description, :price, :inventory])}
+    end
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # def data
+  #   product = Product.find(params[:id])
+  #   render json: ProductSerializer.serialize(product)
+  # end
+
+  private
+
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:name, :description, :inventory, :price)
   end
 end
