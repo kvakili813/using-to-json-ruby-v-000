@@ -1,6 +1,6 @@
-class PostssController < ApplicationController
+class PostsController < ApplicationController
   def index
-    @products = Product.all
+    @posts = Post.all
   end
 
   def inventory
