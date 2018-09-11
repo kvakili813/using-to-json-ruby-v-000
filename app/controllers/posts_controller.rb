@@ -4,17 +4,17 @@ class PostsController < ApplicationController
   end
 
   def inventory
-    product = Product.find(params[:id])
-    render plain: product.inventory > 0 ? true : false
+    post = Post.find(params[:id])
+    render plain: post.inventory > 0 ? true : false
   end
 
   def description
-    product = Product.find(params[:id])
-    render plain: product.description
+    post = Post.find(params[:id])
+    render plain: post.description
   end
 
   def new
-    @product = Product.new
+    @post = Post.new
   end
 
   def create
