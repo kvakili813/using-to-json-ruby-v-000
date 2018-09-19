@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   get 'home', to: 'static#home'
   resources :orders
   resources :authors
-  resources :posts, only: [:show, :index, :new, :create]
+  resources :posts, only: [:show, :index, :new, :create, :update]
   get '/posts/:id/description', to: 'posts#description'
   get '/posts/:id/inventory', to: 'posts#inventory'
-  # get '/products/:id/data', to: 'products#data'
+  get '/products/:id/data', to: 'products#data'
 end
